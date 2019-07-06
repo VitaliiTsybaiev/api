@@ -43,5 +43,7 @@ allure {
 test {
     useTestNG()
     testLogging.showStandardStreams = true
+    options.suites("src/test/resources/googleTetsSuite.xml")
+    scanForTestClasses = false
 
 }
