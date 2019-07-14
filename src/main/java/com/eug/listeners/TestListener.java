@@ -1,7 +1,11 @@
 package com.eug.listeners;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
+import io.restassured.config.ObjectMapperConfig;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import lombok.extern.log4j.Log4j2;
@@ -21,11 +25,22 @@ public class TestListener implements ITestListener {
 //                        .buildPrintStream()
 //        );
 
+        RestAssured.config = RestAssured.config().objectMapperConfig(ObjectMapperConfig.objectMapperConfig()
+                .jackson2ObjectMapperFactory((cls, charset) -> {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.registerModule(new JavaTimeModule());
+                    objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+                    return objectMapper;
+                })
+        );
+
+
         RestAssured.filters(new AllureRestAssured(),
                 new RequestLoggingFilter(),
                 new ResponseLoggingFilter());
 
     }
+
 
     @Override
     public void onTestStart(ITestResult result) {
