@@ -19,6 +19,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
+        log.info("Starting... configuring RestAssured client...");
 //        System.setOut(
 //                IoBuilder.forLogger(LogManager.getLogger("system.out"))
 //                        .setLevel(Level.INFO)

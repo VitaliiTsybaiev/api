@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="mySuiteGoogleTestSuite" verbose="1">
+<suite name="myTestSuite" verbose="1">
 
     <!--<listeners>-->
         <!--<listener class-name="mypackage.MyListener" />-->
@@ -7,7 +7,7 @@
     <!--</listeners>-->
 
 
-    <test name="GoogleTests">
+    <test name="DemoTests">
         <classes>
             <class name="com.eug.RestAssurTest"/>
         </classes>
